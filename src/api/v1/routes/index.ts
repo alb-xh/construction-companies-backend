@@ -1,1 +1,2 @@
-export * from './universe';
+export * from './specialties';
+export * from './companies';

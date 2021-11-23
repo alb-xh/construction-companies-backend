@@ -14,5 +14,7 @@
   "include": [
     "src/*.json",
     "src/*",
+    "src/db/data/*",
+    "src/db/scripts/*"
   ]
 }
