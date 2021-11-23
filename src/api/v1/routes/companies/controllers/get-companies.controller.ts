@@ -2,9 +2,11 @@ import { Controller } from '../../../../../lib';
 import { CompaniesModel, AndQueryCondition } from '../../../../../db';
 
 
-// TODO: add proper validation middleware, and setup cors domain
+// TODO: add proper logger, validation, cors middleware
 export const getCompaniesController = new Controller(async (req, res) => {
   const { name, specialties, limit = 10, offset = 0 } = req.query;
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   const badRequest = (message: string): void => {
     res
@@ -47,10 +49,10 @@ export const getCompaniesController = new Controller(async (req, res) => {
     query.and.push({ specialty: { in: <string[]>specialties } });
   }
 
-  const count = (await CompaniesModel.find()).length;
+  const count = (await CompaniesModel.find(query)).length;
   const companies = await CompaniesModel.find(query, {
-    offset: <number>offset,
-    limit: <number>limit,
+    offset: Number(offset),
+    limit: Number(limit),
   });
 
   res

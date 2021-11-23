@@ -4,7 +4,6 @@ import faker from 'faker';
 import { SPECIALTIES, DB_FILEPATH } from '../constants';
 
 
-
 const ENTRIES = 2000;
 
 function pickRandomFromArray<T> (arr: T[]): T {
@@ -12,13 +11,22 @@ function pickRandomFromArray<T> (arr: T[]): T {
   return arr[randomIndex];
 }
 
+function findCompanyName (): string {
+  let name = faker.company.companyName();
+  while (name.length > 15) {
+    name = faker.company.companyName();
+  }
+
+  return name;
+}
+
 const getNewDbDate = (): Record<string, unknown> => {
   const getNewCompany = () => ({
-    name: faker.company.companyName(),
+    name: findCompanyName(),
     city: faker.address.cityName(),
     specialty: pickRandomFromArray<string>(SPECIALTIES),
     logo: {
-      src: faker.image.business(260, 170),
+      src: `https://picsum.photos/120/90?id=${faker.datatype.uuid()}`,
       alt: faker.lorem.sentence(),
     }
   });

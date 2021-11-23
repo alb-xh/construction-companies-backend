@@ -82,6 +82,7 @@ export class FileModel {
 
   async find (query?: Query, options?: QueryOptions): Promise<unknown[]> {
     const data = await this.readAll();
-    return this.filterData(data, query, options)
+
+    return this.filterData(data, query, options);
   }
 }

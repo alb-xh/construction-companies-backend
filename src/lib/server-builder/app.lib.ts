@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { AppType } from './types'
 import { Route } from './route.lib';
 
